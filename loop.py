@@ -281,7 +281,7 @@ class Runs:
         robot.reset()
 
         # Moves back a bit
-        while robot.distance() <= 40:
+        while robot.distance() <= 37:
             correction = (90 - gyro.angle()) * 10
             robot.drive(200, -correction)
         bot.stop()
@@ -301,7 +301,7 @@ class Runs:
 
         # Turns in to the helicopter, the turn_rate has to be negative because it would bump in to the lever
         movement.left(-81, -40, 100)
-        movement.straight(120)
+        movement.straight(84)
 
         # Goes back
         movement.straight(-70)
@@ -319,6 +319,7 @@ class Runs:
 
         movement.straight(130)
 
+        movement.straight(-10)
         # Puts down the train track and retracts the arm
         medium_motorR.run_time(-700, 800)
         medium_motorR.run_time(700, 800)
@@ -346,7 +347,7 @@ class Runs:
 
         # Turns till the desired angle of 35 degrees to go back to base and goes straight
         movement.right(35, 0, 50)
-        movement.straight(675)
+        movement.straight(693)
 
         # Turns to 90 degrees to aim back at base
         movement.right(90, 0, 80)
@@ -410,14 +411,14 @@ class Runs:
 
         # Rotates to look at the blue circle, due to the weight of the complement angles are adjusted for error
         movement.left(-1, 0, 60)
-        movement.straight(130)
+        movement.straight(150)
 
         # Leaves the blue cargo box in circle, we add a sleep moment so the flap has time to open
         medium_motorL.run_time(1000, 2000, wait=False)
         time.sleep(0.5)
 
         # Goes back and starts to aim for the next mission
-        movement.straight(-90)
+        movement.straight(-100)
         movement.left(90, -30, 60)
 
         # Initializes the travel to the last mission, and in the process leaves a gray cargo missiona and the innovation prodject

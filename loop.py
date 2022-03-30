@@ -300,7 +300,7 @@ class Runs:
         robot.settings(straight_speed=-700, straight_acceleration=575)
 
         # Turns in to the helicopter, the turn_rate has to be negative because it would bump in to the lever
-        movement.left(-74, -40, 100)
+        movement.left(-81, -40, 100)
         movement.straight(120)
 
         # Goes back
@@ -417,7 +417,7 @@ class Runs:
         time.sleep(0.5)
 
         # Goes back and starts to aim for the next mission
-        movement.straight(-120)
+        movement.straight(-90)
         movement.left(90, -30, 60)
 
         # Initializes the travel to the last mission, and in the process leaves a gray cargo missiona and the innovation prodject
@@ -439,7 +439,7 @@ class Runs:
 
         # Changes the settings to get a lower speed and aims at the last mission
         robot.settings(straight_speed=-100, straight_acceleration=50)
-        movement.straight(140)
+        movement.straight(110)
 
         # Calculates the final_turn_time of the turn and if it's over 4 seconds (or getting stuck) it will play the FANFARE sound
         final_turn_time = time.time()

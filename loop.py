@@ -85,7 +85,6 @@ class Drive_base:
         gyro.reset_angle(angle)
         ev3.screen.print("[ OK ]: Gyro Calibrated!")
 
-
 bot = Drive_base()
 
 ########################################################################################################
@@ -282,7 +281,7 @@ class Runs:
         robot.reset()
 
         # Moves back a bit
-        while robot.distance() <= 55:
+        while robot.distance() <= 40:
             correction = (90 - gyro.angle()) * 10
             robot.drive(200, -correction)
         bot.stop()
@@ -297,7 +296,7 @@ class Runs:
 
         # Change in settings to go slower for more accuracy
         robot.settings(straight_speed=-300, straight_acceleration=300)
-        movement.straight(235)
+        movement.straight(245)
         robot.settings(straight_speed=-700, straight_acceleration=575)
 
         # Turns in to the helicopter, the turn_rate has to be negative because it would bump in to the lever
@@ -336,7 +335,7 @@ class Runs:
 
         # Moves straight till the train is locked in
         robot.reset()
-        while robot.distance() >= -420:
+        while robot.distance() >= -405:
             correction = (0 - gyro.angle()) * 6
             robot.drive(-300, -correction)
         bot.stop()
@@ -388,13 +387,13 @@ class Runs:
         bot.stop()
 
         # Moves straight the rest of the distance
-        movement.straight(34)
+        movement.straight(39)
 
         movement.right(87, 0, 40)
 
         # Moves the crane to the desired place
         robot.reset()
-        while robot.distance() >= -415:
+        while robot.distance() >= -430:
             correction = (90 - gyro.angle()) * 15
             robot.drive(-100, -correction)
         bot.stop()
@@ -407,10 +406,10 @@ class Runs:
 
         # Smacks in to the train tracks to have the correct distance inbetween the crane and the stick
         movement.straight(265)
-        movement.straight(-36)
+        movement.straight(-13)
 
         # Rotates to look at the blue circle, due to the weight of the complement angles are adjusted for error
-        movement.left(-6, 0, 60)
+        movement.left(-1, 0, 60)
         movement.straight(130)
 
         # Leaves the blue cargo box in circle, we add a sleep moment so the flap has time to open

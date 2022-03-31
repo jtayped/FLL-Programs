@@ -205,6 +205,8 @@ movement = Moving()
 
 class Runs:
     def run1(self):
+        # Makes a timer to calculate the final time at the end
+        starting_time = time.time()
         # Before run preparations
         bot.stop()
         robot.settings(straight_speed=-700, straight_acceleration=300)
@@ -446,9 +448,26 @@ class Runs:
         final_turn_time = time.time()
         while gyro.angle() > -68:
             if (time.time() - final_turn_time) > 4:
-                ev3.speaker.print(gyro.angle())
                 ev3.speaker.play_file(SoundFile.FANFARE)
-                break
+
+                try:
+                    # Calculates the final_time and prints it on the screen
+                    final_time = time.time()-starting_time
+                    ev3.screen.print("[ OK ]: Time: " + str(final_time))
+
+                    # If it's under or over 2:30 it will do a different beep
+                    if final_time > 150:
+                        for i in range(2):
+                            ev3.speaker.beep(500, 700)
+
+                    if final_time < 150:
+                        ev3.speaker.beep(300, 2000)
+
+                # If it gave error it will simply pass
+                except NameError:
+                    pass
+
+                exit()
             robot.drive(-100, 2)
         bot.stop()
 
@@ -475,9 +494,6 @@ while True:
 
     # First complement doesn't require a color so we dedicated a button to it
     if Button.LEFT in ev3.buttons.pressed():
-        # Makes a timer to calculate the final time at the end
-        starting_time = time.time()
-
         # Executes the first run
         run.run1()
 
@@ -495,24 +511,6 @@ while True:
             if Button.CENTER in ev3.buttons.pressed():
                 # Executes the third run
                 run.run3()
-
-                # It will try to calculate the final time, but if we were not doing full runs it won't give an error
-                try:
-                    # Calculates the final_time and prints it on the screen
-                    final_time = time.time()-starting_time
-                    ev3.screen.print("[ OK ]: Final time: " + str(final_time))
-
-                    # If it's under or over 2:30 it will do a different beep
-                    if final_time > 150:
-                        for i in range(2):
-                            ev3.speaker.beep(500, 700)
-
-                    if final_time < 150:
-                        ev3.speaker.beep(300, 2000)
-
-                # If it gave error it will simply pass
-                except NameError:
-                    pass
 
     # Program just in case the complement doesn't go in right
     if Button.RIGHT in ev3.buttons.pressed():
